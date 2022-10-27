@@ -26,8 +26,7 @@ public class Zadanie2 {
 
 
     public static List<String> sortList(List<String> list){
-        Comparator<String> listComparator = (o1, o2) -> o2.toLowerCase()
-                .compareTo(o1.toLowerCase());
+        Comparator<String> listComparator = (o1, o2) -> o2.toLowerCase().compareTo(o1.toLowerCase());
         list.sort(listComparator);
         return list;
     }
