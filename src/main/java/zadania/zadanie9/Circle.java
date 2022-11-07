@@ -2,8 +2,9 @@ package zadania.zadanie9;
 
 import zadania.zadanie10.Movable;
 import zadania.zadanie10.MoveDirection;
+import zadania.zadanie11.Resizable;
 
-public class Circle implements Movable {
+public class Circle implements Movable, Resizable {
     Point2D center;
     Point2D point;
 
@@ -11,6 +12,12 @@ public class Circle implements Movable {
         this.center = center;
         this.point = point;
 
+    }
+
+    @Override
+    public void resize(double resizeFactor) {
+        var radius = getRadius() * resizeFactor;
+        point = new Point2D(center.getX() + radius, center.getY());
     }
 
     @Override

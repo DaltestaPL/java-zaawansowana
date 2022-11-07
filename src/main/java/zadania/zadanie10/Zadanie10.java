@@ -12,8 +12,6 @@ import zadania.zadanie9.Point2D;
  * Sprawdź poprawność przesunięcia wywołując pozostałe metody klasy Circle.
  */
 public class Zadanie10 {
-
-
     public static void main(String[] args) {
         var point = new Point2D(0,0);
         System.out.println("Punkt przed wykonaniem przesuniecia: " + point);
