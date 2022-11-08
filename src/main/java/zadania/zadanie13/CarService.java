@@ -4,6 +4,7 @@ import zadania.zadanie12.Car;
 import zadania.zadanie12.EngineType;
 import zadania.zadanie12.Manufacturer;
 
+import java.lang.reflect.Parameter;
 import java.util.List;
 
 /**
@@ -32,8 +33,8 @@ public interface CarService {
     Car getMostExpensiveCar();
     Car getCheapestCar();
     List<Car> findCarsWithMoreThanThreeManufacturers();
-    List<Car> sortBy(Object o);
-    Boolean isOnList(Car car);
+    List<Car> sortBy(String parameter);
+    boolean isOnList(Car car);
     List<Car> findCarsByManufacturer(Manufacturer manufacturer);
     List<Car> findCarsByManufacturerAndByYear(Manufacturer manufacturer, String comparing, Integer year);
 

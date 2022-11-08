@@ -4,13 +4,16 @@ import zadania.zadanie12.Car;
 import zadania.zadanie12.EngineType;
 import zadania.zadanie12.Manufacturer;
 
+import java.lang.runtime.SwitchBootstraps;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
  * Stwórz klasę CarService, która będzie zawierać w sobie listę aut, oraz będzie realizować poniższe metody:
- *
+ * <p>
  * dodawanie aut do listy,
  * usuwanie auta z listy,
  * zwracanie listy wszystkich aut,
@@ -55,36 +58,98 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car getMostExpensiveCar() {
-        return null;
+        List<Car> carsCopy = cars;
+        carsCopy.sort(Comparator.comparing(Car::getPrice).reversed());
+        return carsCopy.get(0);
     }
 
     @Override
     public Car getCheapestCar() {
-        return null;
+        Double max = Double.MAX_VALUE;
+        Car cheapestCar = null;
+        for (Car car:cars) {
+            if (car.getPrice() < max) {
+                max = car.getPrice();
+                cheapestCar=car;
+            }
+        }
+        return cheapestCar;
     }
 
     @Override
     public List<Car> findCarsWithMoreThanThreeManufacturers() {
-        return null;
+        return cars.stream().filter(car -> car.getManufacturers().size() > 3).collect(Collectors.toList());
     }
 
     @Override
-    public List<Car> sortBy(Object o) {
-        return null;
+    public List<Car> sortBy(String parametr) {
+        List<Car> carsCopy = cars;
+        switch (parametr) {
+            case "rosnaco" -> {
+                carsCopy.sort(Comparator.comparing(Car::getPrice));
+                return carsCopy;
+            }
+            case "malejaco" -> {
+                carsCopy.sort(Comparator.comparing(Car::getPrice).reversed());
+                return carsCopy;
+            }
+            default -> throw new IllegalStateException("Powinieneś podać rosnaco lub malejaco");
+        }
     }
 
     @Override
-    public Boolean isOnList(Car car) {
-        return null;
+    public boolean isOnList(Car car) {
+        return cars.contains(car);
     }
 
     @Override
     public List<Car> findCarsByManufacturer(Manufacturer manufacturer) {
-        return null;
+        return cars.stream().filter(car -> car.getManufacturers().contains(manufacturer))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Car> findCarsByManufacturerAndByYear(Manufacturer manufacturer, String comparing, Integer year) {
-        return null;
+        return cars.stream().filter(car -> car.getManufacturers()
+                .contains(manufacturer) && checkManufacturers(car.getManufacturers(), comparing, year)).toList();
     }
+
+    private boolean checkManufacturers(List<Manufacturer> manufacturers, String comparing, Integer year) {
+        List<Manufacturer> list = switch (comparing) {
+            case "<" -> manufacturers.stream().filter(m -> m.getYear() < year).toList();
+            case ">" -> manufacturers.stream().filter(m -> m.getYear() > year).toList();
+            case "<=" -> manufacturers.stream().filter(m -> m.getYear() <= year).toList();
+            case ">=" -> manufacturers.stream().filter(m -> m.getYear() >= year).toList();
+            case "=" -> manufacturers.stream().filter(m -> m.getYear().equals(year)).toList();
+            case "!=" -> manufacturers.stream().filter(m -> !m.getYear().equals(year)).toList();
+            default -> throw new IllegalStateException("Musisz podać coś z tego jako comparing: <,>,<=,>=,=,!=");
+        };
+        return !list.isEmpty();
+    }
+
+//    private boolean checkManufacturers(List<Manufacturer> manufacturers, String comparing, Integer year) {
+//        List<Manufacturer> list;
+//        switch (comparing) {
+//            case "<":
+//                list = manufacturers.stream().filter(m -> m.getYear() < year).toList();
+//                break;
+//            case ">":
+//                list = manufacturers.stream().filter(m -> m.getYear() > year).toList();
+//                break;
+//            case "<=":
+//                list = manufacturers.stream().filter(m -> m.getYear() <= year).toList();
+//                break;
+//            case ">=":
+//                list = manufacturers.stream().filter(m -> m.getYear() >= year).toList();
+//                break;
+//            case "=":
+//                list = manufacturers.stream().filter(m -> m.getYear().equals(year)).toList();
+//                break;
+//            case "!=":
+//                list = manufacturers.stream().filter(m -> !Objects.equals(m.getYear(), year)).toList();
+//                break;
+//            default:
+//                throw new IllegalStateException("Musisz podać coś z tego jako comparing: <,>,<=,>=,=,!=");
+//
+//        }
 }
