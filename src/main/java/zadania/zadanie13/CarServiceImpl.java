@@ -4,12 +4,11 @@ import zadania.zadanie12.Car;
 import zadania.zadanie12.EngineType;
 import zadania.zadanie12.Manufacturer;
 
-import java.lang.runtime.SwitchBootstraps;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import static zadania.zadanie13.Messages.WRONG_COMPARING_ARGUMENT;
 
 /**
  * Stwórz klasę CarService, która będzie zawierać w sobie listę aut, oraz będzie realizować poniższe metody:
@@ -122,7 +121,7 @@ public class CarServiceImpl implements CarService {
             case ">=" -> manufacturers.stream().filter(m -> m.getYear() >= year).toList();
             case "=" -> manufacturers.stream().filter(m -> m.getYear().equals(year)).toList();
             case "!=" -> manufacturers.stream().filter(m -> !m.getYear().equals(year)).toList();
-            default -> throw new IllegalStateException("Musisz podać coś z tego jako comparing: <,>,<=,>=,=,!=");
+            default -> throw new IllegalStateException(WRONG_COMPARING_ARGUMENT.getMessage());
         };
         return !list.isEmpty();
     }
