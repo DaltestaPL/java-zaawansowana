@@ -4,6 +4,7 @@ import zadania.zadanie12.Car;
 import zadania.zadanie12.EngineType;
 import zadania.zadanie12.Manufacturer;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +29,11 @@ import static zadania.zadanie13.Messages.WRONG_COMPARING_ARGUMENT;
  */
 public class CarServiceImpl implements CarService {
 
-    private List<Car> cars;
+    private final List<Car> cars;
+
+    public CarServiceImpl() {
+        this.cars = new ArrayList<>();
+    }
 
     @Override
     public void addCar(Car car) {
