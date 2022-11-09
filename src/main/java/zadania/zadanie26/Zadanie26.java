@@ -42,5 +42,11 @@ public class Zadanie26 {
 //        listę wszystkich Modelów
         List<Model> models = list.stream().flatMap(m -> m.models.stream()).toList();
         System.out.println(models);
+
+        // * tylko modele z parzystym rokiem startu produkcji
+        List<Model> listOfModels2 = list.stream()
+                .flatMap(m->m.models.stream())
+                .filter(n->n.productionStartYear / 2 == 0)
+                .toList();
     }
 }
