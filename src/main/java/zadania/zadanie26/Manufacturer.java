@@ -13,4 +13,13 @@ public class Manufacturer {
         this.yearOfCreation = yearOfCreation;
         this.models = models;
     }
+
+    @Override
+    public String toString() {
+        return "Manufacturer{" +
+                "name='" + name + '\'' +
+                ", yearOfCreation=" + yearOfCreation +
+                ", models=" + models +
+                '}';
+    }
 }

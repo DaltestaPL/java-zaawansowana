@@ -2,6 +2,7 @@ package zadania.zadanie26;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * listę wszystkich Modelów,
@@ -37,8 +38,9 @@ public class Zadanie26 {
         Manufacturer manufacturer2 = new Manufacturer("Jeszcze lepsza fabryka", 2000, Arrays.asList(model1, model2));
 
         List<Manufacturer> list = Arrays.asList(manufacturer, manufacturer2);
-
+        System.out.println(list);
 //        listę wszystkich Modelów
-//        List<Model> models = list.stream();
+        List<Model> models = list.stream().flatMap(m -> m.models.stream()).toList();
+        System.out.println(models);
     }
 }
