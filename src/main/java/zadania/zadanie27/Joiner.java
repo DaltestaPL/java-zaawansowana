@@ -17,9 +17,9 @@ public class Joiner {
     }
 
     @SafeVarargs
-    public final <F> String join(F... s) {
+    public final <F> String join(F... elements) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (F element: s) {
+        for (F element: elements) {
             stringBuilder.append(element);
             stringBuilder.append(separator);
         }
