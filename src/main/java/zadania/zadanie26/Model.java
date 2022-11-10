@@ -1,7 +1,10 @@
 package zadania.zadanie26;
 
+import lombok.ToString;
+
 import java.util.List;
 
+@ToString
 public class Model {
 
     public String name;
@@ -12,14 +15,5 @@ public class Model {
         this.name = name;
         this.productionStartYear = productionStartYear;
         this.cars = cars;
-    }
-
-    @Override
-    public String toString() {
-        return "Model{" +
-                "name='" + name + '\'' +
-                ", productionStartYear=" + productionStartYear +
-                ", cars=" + cars +
-                '}';
     }
 }
