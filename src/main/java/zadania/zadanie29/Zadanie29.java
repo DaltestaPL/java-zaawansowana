@@ -9,13 +9,19 @@ import java.util.function.Function;
 public class Zadanie29 {
 
 
-    public <P> double partOf(P[] array, Function<P, Boolean> function) {
-        function.apply()
-        return 0.0;
+    public static <P> double partOf(P[] array, Function<P, Boolean> function) {
+        double counter = 0;
+        for (P element : array) {
+            if (function.apply(element)) {
+                counter++;
+            }
+        }
+        return counter / array.length * 100;
     }
 
-
     public static void main(String[] args) {
-
+        Integer[] tab = new Integer[]{1,2,3,4,5};
+        var result = Zadanie29.partOf(tab, el -> el == 5);
+        System.out.println(result + "%");
     }
 }
