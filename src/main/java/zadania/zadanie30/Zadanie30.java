@@ -1,9 +1,7 @@
 package zadania.zadanie30;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Napisz program, który odczyta dowolny plik i zapisze go w tym samym folderze.
@@ -20,9 +18,21 @@ public class Zadanie30 {
         var list = zadanie30.readByBufferedReader(filename);
 
         //odwrócenie listy
+        Collections.reverse(list);
+        var output = list.stream().map(zadanie30::reverseString).toList();
 
         //zapis pliku
-        zadanie30.writeByBufferedWriter(list, "zadanie30-write");
+        zadanie30.writeByBufferedWriter(output, zadanie30.reverseString(filename));
+    }
+
+    public String reverseString(String s) {
+        var filenameListString = new ArrayList<>(Arrays.asList(s.split("")));
+        Collections.reverse(filenameListString);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String b : filenameListString) {
+            stringBuilder.append(b);
+        }
+        return stringBuilder.toString();
     }
 
     public List<String> readByBufferedReader(String fileName) {
